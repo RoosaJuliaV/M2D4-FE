@@ -9,7 +9,9 @@ body {
 	font-size: 17px;
 	padding: 1em;
 }
-
+.jumbotron {
+    background-color: #a3afe3;
+}
 .switch {
 	position: absolute;
 	top: 0.1em;
