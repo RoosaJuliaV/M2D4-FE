@@ -54,7 +54,7 @@
  </div>
  
  </div>
- <div class="col-12">
+ <div id="nameList" class="col-12">
    <ul class="list-group">
     <li class="list-group-item">Sofia</li>
     <li class="list-group-item">Elias</li>
@@ -68,6 +68,8 @@
 
  <div class="ml-4 mt-4 mb-3">
 
+      <button class="btn btn-secondary" id="numberOfTeams" type="button">Number of Teams:</button>
+
 <select name="numbers" id="numbers">
 <option value="1">1</option>
 <option value="2">2</option>
@@ -75,8 +77,6 @@
 <option value="4">4</option>
 <option value="5">5</option>
       </select>
-
-      <button class="btn btn-secondary" id="numberOfTeams" type="button">Number of Teams</button>
 
       </div>
 </div>
@@ -101,7 +101,7 @@ button.addEventListener("click", function() {
       
   teamButton.addEventListener("click", function() {
   let numberOfTeams = numberInput.value
-  let parent = document.getElementById("newTeams")
+  let parent = document.getElementById("nameList")
   for (let i = 0; i < parseInt(numberOfTeams); i++) {
 
           let ul = document.createElement("ul")
@@ -110,6 +110,21 @@ button.addEventListener("click", function() {
           parent.appendChild(ul)
         }
       })
+      /* let teamButton = document.getElementById("numberOfTeams")
+  let namesInput = document.getElementById("nameList")
+      
+  teamButton.addEventListener("click", function() {
+  let numberOfTeams = numberInput.value
+  let parent = document.getElementById("nameList")
+  for (let i = 0; i < parseInt(numberOfTeams); i++) {
+
+          let ul = document.createElement("ul")
+          ul.id = "team" + i
+          ul.className = 'border'
+          parent.appendChild(ul)
+        }
+      }) */
+
 
  </script>
     <script
