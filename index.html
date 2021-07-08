@@ -76,33 +76,32 @@
 <option value="5">5</option>
       </select>
 
-      <button class="btn btn-secondary" id="numberOfTeams" type="button">Assign</button>
+      <button class="btn btn-secondary" id="numberOfTeams" type="button">Number of Teams</button>
 
       </div>
+</div>
 
-      <div class="col-12" id="listOfTeams">
-        <ul class="list-group mb-3">
-        <li class="list-group-item">Example Name</li>
-        </ul>
-      </div>
-
+ <div class="input-group-append">
+ <button class="btn btn-dark" id="enter2" type="button">Assign</button>
+ </div>
  <script>
- var button = document.getElementById("enter")
-var input = document.getElementById("userinput")
-var ul = document.querySelector("ul")
+ let button = document.getElementById("enter")
+let input = document.getElementById("userinput")
+let ul = document.querySelector("ul")
  
 button.addEventListener("click", function() {
- var li = document.createElement("li")
+ let li = document.createElement("li")
  li.className = 'list-group-item'
  li.textContent = input.value
  ul.appendChild(li)
 })
+
   let teamButton = document.getElementById("numberOfTeams")
   let numberInput = document.getElementById("numbers")
       
   teamButton.addEventListener("click", function() {
   let numberOfTeams = numberInput.value
-  let parent = document.getElementById("listOfTeams")
+  let parent = document.getElementById("newTeams")
   for (let i = 0; i < parseInt(numberOfTeams); i++) {
 
           let ul = document.createElement("ul")
