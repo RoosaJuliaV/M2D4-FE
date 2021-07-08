@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <!--
     WELCOME TO THE STRIVE TEAM GENERATOR!
-
     In this app you will generate teams and assign the participants to them.
     You will use the Bootstrap components for the elements of your app.
-
     The features are the following:
     - The user should be able to add a list of names, find a way to get the user input and fill a list with the new name.
     - The user should be able to set the number of teams he wants, so that they will be generated. A team is just another list to be displayed.
@@ -51,33 +49,69 @@
 <div class="input-group mb-3">
  <input id="userinput" type="text" class="form-control" placeholder="Add name" aria-label="Add a name" aria-describedby="basic-addon2">
  <div class="input-group-append">
- <button class="btn btn-outline-info" id="enter" type="button">Add</button>
+ <button class="btn btn-secondary" id="enter" type="button">Add</button>
  </div>
  </div>
  
  </div>
  <div class="col-12">
- <ul class="list-group">
- <li class="list-group-item">Sofia</li>
- <li class="list-group-item">Elias</li>
- <li class="list-group-item">Gloria</li>
- <li class="list-group-item">Johanna</li>
- <li class="list-group-item">Sarah</li>
- </ul>
+   <ul class="list-group">
+    <li class="list-group-item">Sofia</li>
+    <li class="list-group-item">Elias</li>
+    <li class="list-group-item">Gloria</li>
+    <li class="list-group-item">Johanna</li>
+    <li class="list-group-item">Sarah</li>
+   </ul>
+  </div>
  </div>
  </div>
- </div>
+
+ <div class="ml-4 mt-4 mb-3">
+
+<select name="numbers" id="numbers">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+      </select>
+
+      <button class="btn btn-secondary" id="numberOfTeams" type="button">Assign</button>
+
+      </div>
+
+      <div class="col-12" id="listOfTeams">
+        <ul class="list-group mb-3">
+        <li class="list-group-item">Example Name</li>
+        </ul>
+      </div>
+
  <script>
- var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
+ var button = document.getElementById("enter")
+var input = document.getElementById("userinput")
+var ul = document.querySelector("ul")
  
 button.addEventListener("click", function() {
- var li = document.createElement("li");
- li.className = 'list-group-item';
- li.textContent = input.value;
- ul.appendChild(li);
+ var li = document.createElement("li")
+ li.className = 'list-group-item'
+ li.textContent = input.value
+ ul.appendChild(li)
 })
+  let teamButton = document.getElementById("numberOfTeams")
+  let numberInput = document.getElementById("numbers")
+      
+  teamButton.addEventListener("click", function() {
+  let numberOfTeams = numberInput.value
+  let parent = document.getElementById("listOfTeams")
+  for (let i = 0; i < parseInt(numberOfTeams); i++) {
+
+          let ul = document.createElement("ul")
+          ul.id = "team" + i
+          ul.className = 'border'
+          parent.appendChild(ul)
+        }
+      })
+
  </script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
