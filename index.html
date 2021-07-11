@@ -45,15 +45,212 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form> -->
+ <style>
+            .btn-back {
+                visibility: hidden
+            }
+            
+            .team .list-group-item:hover .btn-back {
+                visibility: visible
+            }
+input[type="text"], textarea {
 
-<div class="input-group mb-3">
- <input id="userinput" type="text" class="form-control" placeholder="Add name" aria-label="Add a name" aria-describedby="basic-addon2">
- <div class="input-group-append">
- <button class="btn btn-secondary" id="enter" type="button">Add</button>
- </div>
- </div>
+  background-color : grey; 
+
+}
+
+        </style>
+    </head>
+    <body>
+<div class="container">
+<div class="row">
+<div class="col-12 col-sm-6 py-4 d-flex align-items-center">
+                    <span class="mx-1">Add name:</span> 
+                    <form onsubmit="addPerson(event)">
+                        <input id="input-name" type="text" class="ml-auto mr-2">
+                        <button type="submit" class="btn btn-outline-dark my-2">Add</button>
+                    </form>
+
+       <!-- <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 py-4 d-flex align-items-center">
+                    <span class="mx-1">Add name:</span> 
+                    <form onsubmit="addPerson(event)">
+                        <input id="input-name" type="text" class="ml-auto mr-2">
+                        <button type="submit" class="btn btn-primary my-2">Add</button>
+                    </form> -->
+                    
+
+                </div> 
+                <div class="col-12 col-sm-6 py-4 d-flex align-items-center">
+                    <span class="mx-1">Teams:</span> 
+                    <div class="ml-auto">
+                    
+                        <button class="btn btn-outline-dark" onclick="removeTeam()">-</button>
+                        <span id="teams-number" class="px-3">2</span>
+                        <button class="btn btn-outline-dark" onclick="addTeam()">+</button>
+                    </div>
+                </div>
+                
+                <div class="col-6 mx-auto">
+                    <ul id="team-queue" class="list-group">
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-success mx-auto my-3" onclick="assign()">
+                            Assign
+                        </button>
+                        <button class="btn btn-outline-danger mx-auto my-3" onclick="reset()">
+                            Reset
+                        </button>
+
+                    </div>
+                    
+                </div>
+                
+                
+                <div class="col-12 my-5">
+                    <div id="teams-row" class="row">
+                                                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            
+            const inputName = document.querySelector("#input-name")
+            const teamQueue = document.querySelector("#team-queue")
+            
+            const teamsN = document.querySelector("#teams-number")
+            const teamsRow = document.querySelector("#teams-row")
+                    
+            function addPerson(event) {
+                event.preventDefault()
+                
+                const li = document.createElement("li")
+                li.classList.add("list-group-item")
+                li.classList.add("d-flex")
+                li.classList.add("align-items-center")
+                li.innerHTML = inputName.value
+                
+                const backBtn = document.createElement("button")
+                
+                backBtn.classList.add("btn")
+                backBtn.classList.add("btn-outline-primary")
+                backBtn.classList.add("btn-back")
+                backBtn.classList.add("ml-auto")
+                
+                backBtn.addEventListener("click", function () {
+                    teamQueue.appendChild(this.parentNode)
+                })
+                
+                backBtn.innerHTML = "⬅"
+                
+                li.appendChild(backBtn)
+                
+                teamQueue.appendChild(li)
+            }
+            
+            window.onload = function () {
+                console.log("loading")
+                createTeams()
+            }
+            
+            
+            function createTeams() {
+                for (let i = 0; i < teamsN.innerHTML; i++) {
+                    teamsRow.innerHTML += `
+                        <div class="col-6 col-sm-3 team">
+                            <h4>Team ${i + 1}</h4>
+                            <ul class="list-group">
+                            </ul>
+                        </div>
+                    `
+                }
+            }
+            
+            function addTeam() {
+                
+                const teamNumber = parseInt(teamsN.innerHTML) + 1
+                
+                teamsN.innerHTML = teamNumber
+                
+                teamsRow.innerHTML += `
+                    <div class="col-6 col-sm-3 team">
+                        <h4>Team ${teamNumber}</h4>
+                        <ul class="list-group">
+                        </ul>
+                    </div>
+                `
+            }
+            
+            function removeTeam() {
+                
+                const newTeamsN = parseInt(teamsN.innerHTML) - 1
+                
+                if (newTeamsN < 2) return
+                
+                
+                teamsN.innerHTML = newTeamsN
+                
+                const teamsList = document.querySelectorAll(".team")
+                const lastTeam = teamsList[teamsList.length - 1]
+                
+                const list = lastTeam.querySelector("ul")
+                                
+                while ( list.children.length !== 0 ) {
+                    teamQueue.appendChild(list.children[0])
+                }
+                
+                lastTeam.remove()
+                
+
+            }
+            
+            function assign() {
+                const person = teamQueue.children[0]
+                
+                if(!person) return
+                
+                const teams = document.querySelectorAll(".team > ul")
+                const randomIndex = Math.floor(Math.random() * teams.length)
+                
+                teams[randomIndex].appendChild(person)
+                
+                console.log( { person, randomIndex })
+                
+            }
+            
+            function reset() {
+                teamQueue.innerHTML = ""
+                
+                teamsRow.innerHTML = ""
+                
+                inputName.value = ""
+                
+                teamsN.innerHTML = 2
+                
+                createTeams()
+            }
+            
+        </script>
+
+
+        <script
+                src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"
+                ></script>
+        <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+                crossorigin="anonymous"
+                ></script>
+    </body>
+</html>
+
  
- </div>
+ <!-- </div>
  <div id="nameList" class="col-12">
    <ul class="list-group">
     <li class="list-group-item">Sofia</li>
